@@ -8,18 +8,18 @@ export default function Home() {
   const [activeView, setActiveView] = useState<'vendor' | 'checkout'>('vendor');
   const [paymentData, setPaymentData] = useState({
     itemName: '',
-    amount: '',
+    amount: 0,
   });
 
-  const handleGenerateLink = (itemName: string, amount: string) => {
+  const handleNavigateToCheckout = (amount: number, itemName: string) => {
     setPaymentData({ itemName, amount });
     setActiveView('checkout');
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
       {activeView === 'vendor' ? (
-        <VendorDashboard onGenerateLink={handleGenerateLink} />
+        <VendorDashboard onNavigateToCheckout={handleNavigateToCheckout} />
       ) : (
         <CheckoutPage
           itemName={paymentData.itemName}
@@ -27,6 +27,6 @@ export default function Home() {
           onBack={() => setActiveView('vendor')}
         />
       )}
-    </div>
+    </>
   );
 }
