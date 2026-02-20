@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Copy, Check, Send, TrendingUp, ArrowRight } from 'lucide-react';
+import { Copy, Check, Plus, Zap, Share2, MoreHorizontal, TrendingUp, ArrowRight, Smartphone, Gift, Briefcase, Palette } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -19,6 +19,13 @@ const VendorDashboard = ({ onNavigateToCheckout }: { onNavigateToCheckout: (amou
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [generatedLink, setGeneratedLink] = useState<Transaction | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const quickProducts = [
+    { id: 'p1', name: 'Electronics', amount: 1245.30, icon: Smartphone, color: 'from-purple-500 to-purple-600' },
+    { id: 'p2', name: 'Services', amount: 540.00, icon: Briefcase, color: 'from-blue-500 to-blue-600' },
+    { id: 'p3', name: 'Gifts & More', amount: 600.00, icon: Gift, color: 'from-green-500 to-green-600' },
+    { id: 'p4', name: 'Design Work', amount: 1080.50, icon: Palette, color: 'from-orange-500 to-orange-600' },
+  ];
 
   const mockTransactions: Transaction[] = [
     { id: '1', itemName: 'iPhone 15 Pro', amount: 850, status: 'paid', timestamp: '2h ago' },
@@ -52,188 +59,122 @@ const VendorDashboard = ({ onNavigateToCheckout }: { onNavigateToCheckout: (amou
   };
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="fixed inset-0 opacity-30 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#14F195] rounded-full blur-3xl mix-blend-screen" />
-        <div className="absolute bottom-1/2 right-1/4 w-96 h-96 bg-[#2775CA] rounded-full blur-3xl mix-blend-screen" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10">
-        {/* Header */}
-        <header className="sticky top-0 z-50 backdrop-blur-xl bg-black/40 border-b border-[#1a1a1a]">
-          <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#14F195] to-[#0fa876] flex items-center justify-center shadow-lg shadow-[#14F195]/50">
-                <span className="text-black font-bold text-lg">◆</span>
-              </div>
-              <span className="text-2xl font-black tracking-tighter">Rift</span>
-            </div>
-            <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs text-[#808080] font-mono">
-              HN7c...3b9P
-            </div>
+    <div className="min-h-screen bg-white text-black overflow-hidden">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+          <button className="p-2 hover:bg-gray-100 rounded-lg transition-all">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div className="flex items-center gap-3">
+            <button className="p-2 hover:bg-gray-100 rounded-lg transition-all">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              </svg>
+            </button>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-500" />
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* Main Grid Layout */}
-        <main className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left Column: Hero & Generator */}
-          <div className="space-y-12">
-            {/* Hero Text */}
-            <div className="space-y-6">
-              <div className="relative">
-                <h1 className="text-6xl lg:text-7xl font-black leading-tight tracking-tighter">
-                  Payment
-                  <br />
-                  <span className="relative inline-block">
-                    <span className="absolute inset-0 text-[#14F195] blur-xl opacity-50">Links</span>
-                    <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#14F195] via-white to-[#2775CA]">
-                      Links
-                    </span>
-                  </span>
-                </h1>
-              </div>
-              <p className="text-lg text-[#808080] max-w-sm leading-relaxed">
-                One-click payment links for your social media business. Share instantly on Instagram, WhatsApp, or anywhere.
-              </p>
-            </div>
+      {/* Main Content */}
+      <main className="max-w-4xl mx-auto px-6 py-8 space-y-8">
+        {/* Main Balance */}
+        <div className="space-y-3">
+          <p className="text-gray-600 text-sm">Main balance</p>
+          <div className="flex items-baseline justify-between">
+            <h1 className="text-6xl font-black">$3,465.80</h1>
+            <button className="p-2 hover:bg-gray-100 rounded-lg transition-all">
+              <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-            {/* Generator Card */}
-            <div className="space-y-6 bg-gradient-to-br from-[#0a0a0a]/80 to-[#000000]/40 border border-[#14F195]/20 rounded-2xl p-8 backdrop-blur-sm hover:border-[#14F195]/40 transition-all duration-500">
-              {/* Amount Input */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-white uppercase tracking-widest opacity-70">
-                  Amount (USDC)
-                </label>
-                <div className="relative group">
-                  <Input
-                    type="number"
-                    placeholder="0.00"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="w-full h-16 bg-black/50 border border-[#1a1a1a] text-white text-4xl font-black rounded-xl focus:border-[#14F195] focus:ring-2 focus:ring-[#14F195]/30 transition-all placeholder-[#404040]"
-                  />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#808080] font-semibold">USDC</span>
-                </div>
-              </div>
+        {/* Quick Action Buttons */}
+        <div className="flex gap-3">
+          <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all font-semibold">
+            <Plus className="w-5 h-5" />
+            Add
+          </button>
+          <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all font-semibold">
+            <Zap className="w-5 h-5" />
+            Move
+          </button>
+          <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all font-semibold">
+            <Share2 className="w-5 h-5" />
+            Send
+          </button>
+          <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all font-semibold">
+            <MoreHorizontal className="w-5 h-5" />
+          </button>
+        </div>
 
-              {/* Item Input */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-white uppercase tracking-widest opacity-70">
-                  What are you selling?
-                </label>
-                <Input
-                  type="text"
-                  placeholder="e.g., iPhone 15 Pro, Design Service"
-                  value={itemName}
-                  onChange={(e) => setItemName(e.target.value)}
-                  className="w-full h-12 bg-black/50 border border-[#1a1a1a] text-white rounded-xl focus:border-[#14F195] focus:ring-2 focus:ring-[#14F195]/30 transition-all placeholder-[#404040]"
-                />
-              </div>
-
-              {/* Generate Button */}
-              <Button
-                onClick={handleGenerateLink}
-                disabled={!amount || !itemName}
-                className="w-full h-14 bg-gradient-to-r from-[#14F195] to-[#0fa876] hover:from-[#14F195]/90 hover:to-[#0fa876]/90 text-black font-bold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group shadow-lg shadow-[#14F195]/30 text-base"
-              >
-                <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
-                Generate Link
-              </Button>
-            </div>
+        {/* Quick Actions Section */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold">Quick actions</h2>
+            <button className="text-[#14F195] text-sm font-semibold hover:opacity-80">Edit</button>
           </div>
 
-          {/* Right Column: Activity & Stats */}
-          <div className="space-y-8">
-            {/* Stats Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gradient-to-br from-[#14F195]/10 to-transparent border border-[#14F195]/30 rounded-xl p-6 space-y-3 hover:border-[#14F195]/60 transition-all">
-                <p className="text-[#14F195] text-sm font-bold uppercase tracking-wider">Total Revenue</p>
-                <p className="text-3xl font-black">1,620</p>
-                <p className="text-xs text-[#808080]">USDC earned</p>
-              </div>
-              <div className="bg-gradient-to-br from-[#2775CA]/10 to-transparent border border-[#2775CA]/30 rounded-xl p-6 space-y-3 hover:border-[#2775CA]/60 transition-all">
-                <p className="text-[#2775CA] text-sm font-bold uppercase tracking-wider">Links Generated</p>
-                <p className="text-3xl font-black">47</p>
-                <p className="text-xs text-[#808080]">Total links</p>
-              </div>
-            </div>
-
-            {/* Recent Activity */}
-            <div className="space-y-4">
-              <div>
-                <h2 className="text-xl font-black">Recent Activity</h2>
-                <p className="text-sm text-[#808080]">Your latest transactions</p>
-              </div>
-
-              <div className="space-y-2 max-h-96 overflow-y-auto">
-                {mockTransactions.map((tx) => (
-                  <div
-                    key={tx.id}
-                    className="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 hover:border-[#14F195]/30 transition-all duration-300 group cursor-pointer"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <p className="font-semibold text-white group-hover:text-[#14F195] transition-colors">{tx.itemName}</p>
-                        <p className="text-xs text-[#808080] mt-1">{tx.timestamp}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-bold text-white">{tx.amount}</p>
-                        <span
-                          className={`inline-block text-xs font-bold px-2.5 py-1 rounded-full mt-1.5 ${
-                            tx.status === 'paid'
-                              ? 'bg-[#14F195]/20 text-[#14F195] border border-[#14F195]/40'
-                              : 'bg-[#1a1a1a] text-[#808080] border border-[#1a1a1a]'
-                          }`}
-                        >
-                          {tx.status === 'paid' ? '✓ Paid' : 'Pending'}
-                        </span>
-                      </div>
+          {/* Colorful Cards Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {quickProducts.map((product) => {
+              const Icon = product.icon;
+              return (
+                <button
+                  key={product.id}
+                  onClick={() => {
+                    setItemName(product.name);
+                    setAmount(product.amount.toString());
+                    handleGenerateLink();
+                  }}
+                  className={`bg-gradient-to-br ${product.color} rounded-2xl p-6 text-white font-bold space-y-4 hover:shadow-lg hover:shadow-current/50 transition-all transform hover:scale-105 cursor-pointer group`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="bg-white/20 p-3 rounded-lg group-hover:bg-white/30 transition-all">
+                      <Icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div className="text-left">
+                    <p className="text-sm opacity-90">{product.name}</p>
+                    <p className="text-2xl font-black">${product.amount.toFixed(2)}</p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
-        </main>
+        </div>
 
-        {/* Success Toast */}
-        {showSuccess && generatedLink && (
-          <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-gradient-to-r from-[#14F195]/20 to-[#2775CA]/20 border border-[#14F195]/40 rounded-xl p-6 backdrop-blur-xl space-y-4 max-w-sm animate-fade-in">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#14F195] flex items-center justify-center">
-                <Check className="w-5 h-5 text-black" />
+        {/* Recent Activity */}
+        <div className="space-y-4 pb-12">
+          <h2 className="text-lg font-bold">Latest transactions</h2>
+          <div className="space-y-3">
+            {mockTransactions.map((tx) => (
+              <div key={tx.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all">
+                <div className="flex-1">
+                  <p className="font-semibold">{tx.itemName}</p>
+                  <p className="text-xs text-gray-600">{tx.timestamp}</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-bold">${tx.amount.toFixed(2)}</p>
+                  <span className={`text-xs font-semibold px-2 py-1 rounded-full inline-block mt-1 ${
+                    tx.status === 'paid' 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-gray-200 text-gray-700'
+                  }`}>
+                    {tx.status === 'paid' ? '✓ Paid' : 'Pending'}
+                  </span>
+                </div>
               </div>
-              <div className="flex-1">
-                <p className="font-bold text-white">{generatedLink.itemName}</p>
-                <p className="text-sm text-[#808080]">{generatedLink.amount} USDC</p>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => {
-                  handleCopyLink(generatedLink.id);
-                  setShowSuccess(false);
-                }}
-                className="flex-1 bg-[#14F195] text-black font-bold py-2 rounded-lg hover:bg-[#14F195]/90 transition-all"
-              >
-                {copiedId === generatedLink.id ? 'Copied!' : 'Copy Link'}
-              </button>
-              <button
-                onClick={() => {
-                  onNavigateToCheckout(generatedLink.amount, generatedLink.itemName);
-                  setShowSuccess(false);
-                }}
-                className="flex-1 bg-[#2775CA] text-white font-bold py-2 rounded-lg hover:bg-[#2775CA]/90 transition-all flex items-center justify-center gap-2"
-              >
-                Preview
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+
+      </main>
     </div>
   );
 };
